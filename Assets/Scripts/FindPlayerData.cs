@@ -22,8 +22,11 @@ public class FindPlayerData : MonoBehaviour
     {
         if (screenName.text != "" && playerid.text != "" )
         {
-            
             fetch.SetupPlayerSearchData(screenName.text, playerid.text);
+
+            //Reset text boxes
+            screenName.text = ""; 
+            playerid.text = "";
         }
     }
 }

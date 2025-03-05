@@ -13,6 +13,7 @@ public class FetchData : MonoBehaviour
     List<PlayerData> playerList;
     PlayerData player;
     public GameObject playerData;
+    public GameObject findPlayer;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -82,6 +83,7 @@ public class FetchData : MonoBehaviour
                 player = JsonConvert.DeserializeObject<PlayerData>(response);
                 GetPlayer();
                 playerData.SetActive(true);
+                findPlayer.SetActive(false);
             }
             yield return null;
         }
