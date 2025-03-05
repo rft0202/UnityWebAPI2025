@@ -11,7 +11,7 @@ public class PostData : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        SetupPlayerData("Cory", 300002, 99);
+        //SetupPlayerData("Cory", 300002, 99);
     }
 
     // Update is called once per frame
@@ -20,13 +20,15 @@ public class PostData : MonoBehaviour
         
     }
 
-    public void SetupPlayerData(string name, int score, int level)
+    public void SetupPlayerData(string screenname, string fname, string lname, string date, int score)
     {
         player = new PlayerData();
 
-        player.name = name;
+        player.screenName = screenname;
+        player.firstName = fname;
+        player.lastName = lname;
+        player.dateStarted = date;
         player.score = score;
-        player.level = level;
 
         string json = JsonUtility.ToJson(player);
         Debug.Log(json);

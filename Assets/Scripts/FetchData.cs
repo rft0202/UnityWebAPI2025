@@ -77,6 +77,9 @@ public class FetchData : MonoBehaviour
             if (!string.IsNullOrEmpty(newPlayerId))
             {
                 Debug.Log("PlayerID: " + newPlayerId);
+                player = JsonUtility.FromJson<PlayerData>(json);
+                GetPlayer();
+                playerData.SetActive(true);
             }
             yield return null;
         }
@@ -97,7 +100,7 @@ public class FetchData : MonoBehaviour
     {
         player = new PlayerData();
 
-        player.name = name;
+        player.screenName = name;
         
 
         string json = JsonUtility.ToJson(player);
@@ -108,9 +111,11 @@ public class FetchData : MonoBehaviour
 
     public void GetPlayer()
     {
-        playerData.transform.GetChild(0).GetComponent<TMP_Text>().text = player.name;
-        playerData.transform.GetChild(1).GetComponent<TMP_Text>().text = player.score.ToString();
-        playerData.transform.GetChild(2).GetComponent<TMP_Text>().text = player.level.ToString();
+        playerData.transform.GetChild(0).GetComponent<TMP_Text>().text = player.screenName;
+        playerData.transform.GetChild(1).GetComponent<TMP_Text>().text = player.firstName;
+        playerData.transform.GetChild(2).GetComponent<TMP_Text>().text = player.lastName;
+        playerData.transform.GetChild(3).GetComponent<TMP_Text>().text = player.dateStarted;
+        playerData.transform.GetChild(4).GetComponent<TMP_Text>().text = player.score.ToString();
     }
 
     string ExtractPlayerId(string jsonResponse)
@@ -125,8 +130,10 @@ public class FetchData : MonoBehaviour
 
 public class PlayerData 
 {
-    public string name;
+    public string screenName;
+    public string firstName;
+    public string lastName;
+    public string dateStarted;
     public int score;
-    public int level;
 
 }

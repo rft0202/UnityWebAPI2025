@@ -3,9 +3,11 @@ using UnityEngine;
 
 public class SendPlayerData : MonoBehaviour
 {
-    public TMP_InputField name;
+    public TMP_InputField screenName;
+    public TMP_InputField firstName;
+    public TMP_InputField lastName;
+    public TMP_InputField dateStarted;
     public TMP_InputField score;
-    public TMP_InputField level;
     public PostData post;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,11 +23,10 @@ public class SendPlayerData : MonoBehaviour
 
     public void SendData()
     {
-        if(level.text != "" && name.text != "" && score.text != "")
+        if(screenName.text != "" && firstName.text != "" && lastName.text != "" && dateStarted.text != "" && score.text != "")
         {
             int scoreData = int.Parse(score.text);
-            int levelData = int.Parse(level.text);
-            post.SetupPlayerData(name.text, scoreData,levelData);
+            post.SetupPlayerData(screenName.text, firstName.text, lastName.text, dateStarted.text, scoreData);
         }
     }
 }
