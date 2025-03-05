@@ -11,7 +11,7 @@ public class PostData : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //SetupPlayerData("Cory", 300002, 99);
+        //SetupPlayerData("rft0202", "Rebecca", "Tester", "03/05/2025", 5);
     }
 
     // Update is called once per frame

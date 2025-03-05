@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FindPlayerData : MonoBehaviour
 {
-    public TMP_InputField name;
+    public TMP_InputField screenName;
     public TMP_InputField playerid;
     public FetchData fetch;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -20,10 +20,10 @@ public class FindPlayerData : MonoBehaviour
     }
     public void SearchForPlayer()
     {
-        if (name.text != "" && playerid.text != "" )
+        if (screenName.text != "" && playerid.text != "" )
         {
             
-            fetch.SetupPlayerSearchData(name.text, playerid.text);
+            fetch.SetupPlayerSearchData(screenName.text, playerid.text);
         }
     }
 }

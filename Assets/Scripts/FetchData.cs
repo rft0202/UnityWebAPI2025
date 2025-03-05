@@ -77,7 +77,9 @@ public class FetchData : MonoBehaviour
             if (!string.IsNullOrEmpty(newPlayerId))
             {
                 Debug.Log("PlayerID: " + newPlayerId);
-                player = JsonUtility.FromJson<PlayerData>(json);
+                //player = JsonUtility.FromJson<PlayerData>(json);
+                //player = JsonUtility.FromJson<PlayerData>(response);
+                player = JsonConvert.DeserializeObject<PlayerData>(response);
                 GetPlayer();
                 playerData.SetActive(true);
             }

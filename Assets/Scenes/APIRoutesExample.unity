@@ -4953,7 +4953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec14d8a8dc298384b991430a226cd0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: {fileID: 1277861384}
+  screenName: {fileID: 1277861384}
   playerid: {fileID: 602368284}
   fetch: {fileID: 1283871249}
 --- !u!114 &1891726950
