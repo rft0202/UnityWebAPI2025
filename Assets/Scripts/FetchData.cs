@@ -6,15 +6,16 @@ using UnityEngine;
 using UnityEngine.Networking;
 using TMPro;
 using System.Text;
+using System;
 
 public class FetchData : MonoBehaviour
 {
-    string serverUrl = "http://localhost:3000/player";
+    string serverUrl = "http://localhost:3000";
     List<PlayerData> playerList;
     PlayerData player;
     public GameObject playerData;
     public GameObject findPlayer;
-
+    public GameObject editPlayer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,7 +31,7 @@ public class FetchData : MonoBehaviour
 
     public IEnumerator GetData()
     {
-        using (UnityWebRequest request = UnityWebRequest.Get(serverUrl))
+        using (UnityWebRequest request = UnityWebRequest.Get(serverUrl + "/player"))
         {
             yield return request.SendWebRequest();
 
@@ -58,7 +59,7 @@ public class FetchData : MonoBehaviour
 
     public IEnumerator GetDataByID(string json, string playerid = "")
     {
-        string url = serverUrl + "/" + playerid;
+        string url = serverUrl + "/player/" + playerid;
         Debug.Log(url);
         byte[] jsonToSend = Encoding.UTF8.GetBytes(json);
         UnityWebRequest request = new UnityWebRequest(url, "GET");
@@ -85,6 +86,49 @@ public class FetchData : MonoBehaviour
                 playerData.SetActive(true);
                 findPlayer.SetActive(false);
             }
+            yield return null;
+        }
+        else 
+        {
+            //Handles Error
+            Debug.Log("Error: " + request.error);
+            yield return null;
+        }
+    }
+
+    public IEnumerator UpdatePlayer()
+    {
+        editPlayer.SetActive(false);
+
+        //Update player
+        player.screenName = editPlayer.transform.GetChild(1).GetComponent<TMP_InputField>().text;
+        player.firstName = editPlayer.transform.GetChild(2).GetComponent<TMP_InputField>().text;
+        player.lastName = editPlayer.transform.GetChild(3).GetComponent<TMP_InputField>().text;
+        player.dateStarted = editPlayer.transform.GetChild(4).GetComponent<TMP_InputField>().text;
+        int score = int.Parse(editPlayer.transform.GetChild(5).GetComponent<TMP_InputField>().text);
+        player.score = score;
+
+        //Convert to Json
+        string json = JsonUtility.ToJson(player);
+
+        string url = serverUrl + "/updatePlayer";
+        Debug.Log(url);
+        byte[] jsonToSend = Encoding.UTF8.GetBytes(json);
+        UnityWebRequest request = new UnityWebRequest(url, "POST");
+        request.uploadHandler = new UploadHandlerRaw(jsonToSend);
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        Debug.Log(json);
+
+        //Send request
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            string response = request.downloadHandler.text;
+            Debug.Log($"Success: {response}");
+
             yield return null;
         }
         else 
@@ -129,6 +173,20 @@ public class FetchData : MonoBehaviour
         int endIndex = jsonResponse.IndexOf("\"", index);
         return jsonResponse.Substring(index, endIndex - index);
 
+    }
+
+    public void DisplayPlayerToEdit()
+    {
+        editPlayer.transform.GetChild(1).GetComponent<TMP_InputField>().text = player.screenName;
+        editPlayer.transform.GetChild(2).GetComponent<TMP_InputField>().text = player.firstName;
+        editPlayer.transform.GetChild(3).GetComponent<TMP_InputField>().text = player.lastName;
+        editPlayer.transform.GetChild(4).GetComponent<TMP_InputField>().text = player.dateStarted;
+        editPlayer.transform.GetChild(5).GetComponent<TMP_InputField>().text = player.score.ToString();
+    }
+
+    public void StartUpdate()
+    {
+        StartCoroutine(UpdatePlayer());
     }
 }
 
