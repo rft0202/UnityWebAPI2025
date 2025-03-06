@@ -139,6 +139,43 @@ public class FetchData : MonoBehaviour
         }
     }
 
+    public IEnumerator DeletePlayer(string name)
+    {
+        player = new PlayerData();
+
+        player.screenName = name;
+
+        string json = JsonUtility.ToJson(player);
+        Debug.Log(json);
+
+        string url = serverUrl + "/delete/screenName?screenName=" + name;
+        Debug.Log(url);
+        //byte[] jsonToSend = Encoding.UTF8.GetBytes(json);
+        UnityWebRequest request = new UnityWebRequest(url, "DELETE");
+        //request.uploadHandler = new UploadHandlerRaw(jsonToSend);
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        Debug.Log(json);
+
+        //Send request
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            string response = request.downloadHandler.text;
+            Debug.Log($"Success: {response}");
+
+            yield return null;
+        }
+        else
+        {
+            //Handles Error
+            Debug.Log("Error: " + request.error);
+            yield return null;
+        }
+    }
+
     public void StartFetch()
     {
         StartCoroutine(GetData());

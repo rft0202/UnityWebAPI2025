@@ -29,4 +29,16 @@ public class FindPlayerData : MonoBehaviour
             playerid.text = "";
         }
     }
+
+    public void SearchForPlayerToDelete()
+    {
+        if (screenName.text != "" && playerid.text != "")
+        {
+            StartCoroutine(fetch.DeletePlayer(screenName.text));
+
+            //Reset text boxes
+            screenName.text = "";
+            playerid.text = "";
+        }
+    }
 }

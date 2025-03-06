@@ -544,7 +544,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Find Player
+  m_text: Delete Player
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3864,7 +3864,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 80, y: -165}
+  m_AnchoredPosition: {x: 80, y: -155}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &494318128
@@ -4384,7 +4384,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1987260277}
         m_TargetAssemblyTypeName: FindPlayerData, Assembly-CSharp
-        m_MethodName: SearchForPlayer
+        m_MethodName: SearchForPlayerToDelete
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5873,10 +5873,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cdcd8f655053e241a5b77587385e0dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenName: {fileID: 0}
-  firstName: {fileID: 0}
-  lastName: {fileID: 0}
-  dateStarted: {fileID: 0}
+  screenName: {fileID: 1152589370}
+  firstName: {fileID: 1856179381}
+  lastName: {fileID: 220177822}
+  dateStarted: {fileID: 1521529243}
   score: {fileID: 467665783}
   post: {fileID: 1387003795}
 --- !u!114 &824876678
