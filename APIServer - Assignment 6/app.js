@@ -45,7 +45,7 @@ app.get("/player", async (req, res)=>{
         if(!players){
             return res.status(404).json({error:"Players not found"})
         }
-
+        players.sort((a,b)=>b.screenName - a.screenName);
         res.json(players);
         console.log(players);
     }
